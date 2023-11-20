@@ -1,0 +1,15 @@
+.card{
+    margin-left: 370px;
+    margin-top: 200px;
+    border: 2px solid;
+    width: 550px;
+    border-radius: 10px;
+}
+.tituloLogin{
+    font-family: Arial black;
+    font-style: italic;
+}
+.usser, .pass{
+    font-family: Arial black;
+    font-style: italic;
+}
