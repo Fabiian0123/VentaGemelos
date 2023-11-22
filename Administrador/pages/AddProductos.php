@@ -11,7 +11,7 @@ include '../head.php';
     <div class="form-addproducto">
         <form action="../DAO/guarProducto.php" method="post">
             Código del producto:<br>
-            <input class="in1" type="number" name="codigo_producto">
+            <input class="in1" type="text" name="codigo_producto">
             <br>
             Nombre del producto:<br>
             <input class="in1" type="text" name="nombre_producto">

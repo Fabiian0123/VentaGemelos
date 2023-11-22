@@ -16,7 +16,12 @@
         <a type="button" class="btn btn-danger" id="btn_izquierda"><--</a>
         <a type="button" class="btn btn-success m-2" id="btn_derecha">--></a>
     </div>
-    <div class="tablaResultados2" id="tabla_resultados_2"></div>
+    <div class="tablaResultados2" id="tabla_resultados_2">
+        <tr>
+            <th><b>&nbspItem&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></th>
+            <th><b>Producto&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></th>
+        </tr>
+    </div>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -64,33 +69,31 @@
         if (fila_seleccionada_1) {
             // Clonar la fila seleccionada y eliminar la clase 'seleccionado'
             var fila_a_mover = fila_seleccionada_1.clone().removeClass('seleccionado');
-
+            var cantidad_actual = parseInt(fila_seleccionada_1.find('.cant').text());
+            // Verificar si hay suficientes productos para mover
+            if (cantidad_actual > 0) {
+                // Actualizar la cantidad en la tabla_resultados
+                fila_seleccionada_1.find('.cant').text(cantidad_actual - 1);
+            } else {
+                // Si no hay suficientes productos, puedes manejarlo según tus requisitos
+                alert('No hay suficientes productos disponibles.');
+                return;
+            }
             // Agregar un número al principio de la fila
             var numero = $('#tabla_resultados_2 tr').length + 1;
-            fila_a_mover.prepend('<td>' + numero + '</td>');
+            fila_a_mover.prepend('<td>'+ numero +' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+'</td>');
+
+            // Eliminar la columna 'cant' de la fila a mover
+            fila_a_mover.find('.cant').remove();
 
             // Mover la fila a la tabla 2
             $('#tabla_resultados_2').append(fila_a_mover);
-
-            // Agregar controlador de eventos de clic a las filas de la tabla 2
-            $('#tabla_resultados_2 tr').on('click', function () {
-                // Eliminar la clase 'seleccionado' de todas las filas
-                $('#tabla_resultados_2 tr').removeClass('seleccionado');
-
-                // Agregar la clase 'seleccionado' a la fila que se acaba de hacer clic
-                $(this).addClass('seleccionado');
-
-                // Almacenar la fila seleccionada
-                fila_seleccionada_2 = $(this);
-            });
-
-            // Eliminar la fila seleccionada de la tabla 1
-            fila_seleccionada_1.remove();
 
             // Limpiar la fila seleccionada
             fila_seleccionada_1 = null;
         }
     });
+
 
     // Mover la fila seleccionada a la tabla 1 cuando se haga clic en el botón btn_izquierda
     $('#btn_izquierda').on('click', function () {
@@ -129,6 +132,9 @@
             background-color: #008f39;
         }
         #tabla_resultados tr {
+            cursor: pointer;
+        }
+        #tabla_resultados_2{
             cursor: pointer;
         }
     </style>
