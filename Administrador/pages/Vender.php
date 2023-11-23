@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include '../head.php'; ?>
+<?php include '../head.php';?>
 
 <body>
     <?php include '../nav.php'; ?>
@@ -9,6 +9,7 @@
     <form class="inBusqueda">
         Codigo o nombre del producto:<br>
         <input class="inBusqueda2" type="text" name="buscar_producto" id="buscar_producto">
+        <a type="button" class="btn btn-secondary m-2" id="agregar_servicio">Agregar Servicio</a>
     </form>
     <br>
     <div class="tablaResultados" id="tabla_resultados"></div>
@@ -63,7 +64,6 @@
             }
         });
     });
-
     // Mover la fila seleccionada a la tabla 2 cuando se haga clic en el botón btn_derecha
     $('#btn_derecha').on('click', function () {
         if (fila_seleccionada_1) {
@@ -82,6 +82,7 @@
             // Agregar un número al principio de la fila
             var numero = $('#tabla_resultados_2 tr').length + 1;
             fila_a_mover.prepend('<td>'+ numero +' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+' '+'</td>');
+    
 
             // Eliminar la columna 'cant' de la fila a mover
             fila_a_mover.find('.cant').remove();
