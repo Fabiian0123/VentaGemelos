@@ -9,7 +9,13 @@
     <form class="inBusqueda">
         Codigo o nombre del producto:<br>
         <input class="inBusqueda2" type="text" name="buscar_producto" id="buscar_producto">
-        <a type="button" class="btn btn-secondary m-2" id="agregar_servicio">Agregar Servicio</a>
+    </form>
+    <form id="form_servicio" class="inBusqueda">
+        Descripción del servicio:<br>
+        <input type="text" name="descripcion_servicio" id="descripcion_servicio"><br>
+        Precio del servicio:<br>
+        <input type="text" name="precio_servicio" id="precio_servicio"><br>
+        <button type="button" id="guardar_servicio">Agregar Servicio</button>
     </form>
     <br>
     <div class="tablaResultados" id="tabla_resultados"></div>
@@ -21,8 +27,10 @@
         <tr>
             <th><b>&nbspItem&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></th>
             <th><b>Producto&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></th>
+            <th><b>Precio<b></th>
         </tr>
     </div>
+    <div id="total">Total: $0</div>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -94,8 +102,6 @@
             fila_seleccionada_1 = null;
         }
     });
-
-
     // Mover la fila seleccionada a la tabla 1 cuando se haga clic en el botón btn_izquierda
     $('#btn_izquierda').on('click', function () {
         if (fila_seleccionada_2) {
@@ -123,8 +129,59 @@
             // Limpiar la fila seleccionada
             fila_seleccionada_2 = null;
         }
+        
     });
 });
+$('#guardar_servicio').on('click', function () {
+    // Obtener los valores de los campos de entrada
+    var descripcion_servicio = $('#descripcion_servicio').val();
+    var precio_servicio = $('#precio_servicio').val();
+
+    // Agregar una nueva fila a la tabla con la información del servicio
+    var numero = $('#tabla_resultados_2 tr').length + 1;
+    var nueva_fila = '<tr><td>' + numero + '</td><td>'+'Servicio'+' '+' '+'</td><td>' + precio_servicio + '</td></tr>';
+    $('#tabla_resultados_2').append(nueva_fila);
+
+    // Realizar la consulta AJAX para guardar los datos en la base de datos
+    $.ajax({
+        type: 'POST',
+        url: '../DAO/guardar_servicio.php',
+        data: { 
+            descripcion_servicio: descripcion_servicio,
+            precio_servicio: precio_servicio
+        },
+        success: function (data) {
+            // Puedes manejar la respuesta del servidor aquí
+            alert('Servicio guardado exitosamente.');
+        }
+    });
+});
+function calcularTotal() {
+    // Inicializar el total a 0
+    var total = 0;
+
+    // Sumar el precio de cada fila en la tabla 2
+    $('#tabla_resultados_2 tr').each(function() {
+        var precio = $(this).find('.precio').text();
+        if (!isNaN(precio)) { // Verificar si el precio es un número
+            total += parseFloat(precio);
+        }
+    });
+
+    // Sumar el precio del servicio ingresado
+    var precio_servicio = $('#precio_servicio').val();
+    if (!isNaN(precio_servicio)) { // Verificar si el precio del servicio es un número
+        total += parseFloat(precio_servicio);
+    }
+
+    // Actualizar el total en el HTML
+    $('#total').text('Total: $' + total.toFixed(2));
+}
+
+// Llamar a calcularTotal() cuando se hace clic en los botones
+$('#btn_derecha').on('click', calcularTotal);
+$('#guardar_servicio').on('click', calcularTotal);
+
 
     </script>
 
