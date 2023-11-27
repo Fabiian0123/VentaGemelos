@@ -22,7 +22,7 @@ if (isset($_GET['buscar_producto'])) {
             echo "<td>{$row['Codigo']}</td>";
             echo "<td>{$row['Producto']}</td>";
             echo "<td>{$row['Marca']}</td>";
-            echo "<td>{$row['Precio']}</td>";
+            echo "<td class='precio'>{$row['Precio']}</td>";
             echo "<td class='cant'>{$row['cant']}</td>";
             echo "</tr>";
         }

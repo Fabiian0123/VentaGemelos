@@ -44,3 +44,15 @@
     text-align: center;
     margin-top: -450px;
 }
+.totalPrecio{
+    text-align: center;
+    margin-top: -380px;
+}
+.totalServicios{
+    text-align: center;
+    margin-top: 10px;   
+}
+.totalSuma{
+    text-align: center;
+    margin-top: 10px;
+}

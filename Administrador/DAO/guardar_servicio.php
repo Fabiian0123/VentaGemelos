@@ -16,6 +16,6 @@ if ($stmt->execute()) {
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
-
+$stmt->close();
 $conn->close();
 ?>
