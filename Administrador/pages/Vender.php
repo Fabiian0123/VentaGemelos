@@ -6,16 +6,35 @@
     <?php include '../nav.php'; ?>
 
     <form class="inBusqueda">
-        Codigo o nombre del producto:<br>
+        Codigo, marca o nombre del producto:<br>
         <input class="inBusqueda2" type="text" name="buscar_producto" id="buscar_producto">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#servicioModal">
+            Agregar Servicio
+        </button>
     </form>
-    <form id="form_servicio" class="inBusqueda">
-        Descripción del servicio:<br>
-        <input type="text" name="descripcion_servicio" id="descripcion_servicio"><br>
-        Precio del servicio:<br>
-        <input type="number" name="precio_servicio" id="precio_servicio"><br>
-        <button type="button" id="guardar_servicio">Agregar Servicio</button>
-    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="servicioModal" tabindex="-1" role="dialog" aria-labelledby="servicioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="servicioModalLabel">Agregar Servicio</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Aquí va tu formulario -->
+            <form id="form_servicio" class="inBusqueda">
+                Descripción del servicio:<br>
+                <input type="text" name="descripcion_servicio" id="descripcion_servicio"><br>
+                Precio del servicio:<br>
+                <input type="number" name="precio_servicio" id="precio_servicio"><br>
+                <button type="button" id="guardar_servicio">Agregar Servicio</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
     <br>
     <div class="tablaResultados precio" id="tabla_resultados"></div>
     <div class="botonesVender">
@@ -30,10 +49,9 @@
     </div>
     <div class="totalPrecio" id="total_precios"></div>
     <div class="totalServicios" id="total_servicios"></div>
-    <div class="totalSuma" id="total_suma"></div>
+
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script>
-    $(document).ready(function () {
     var total_precios = 0;
     // Variables para almacenar las filas seleccionadas
     var fila_seleccionada_1, fila_seleccionada_2;
@@ -74,7 +92,9 @@
         });
     });
     // Mover la fila seleccionada a la tabla 2 cuando se haga clic en el botón btn_derecha
+    total_precios=0;
     $('#btn_derecha').on('click', function () {
+        
         if (fila_seleccionada_1) {
             // Clonar la fila seleccionada y eliminar la clase 'seleccionado'
             var fila_a_mover = fila_seleccionada_1.clone().removeClass('seleccionado');
@@ -100,14 +120,12 @@
             $('#tabla_resultados_2').append(fila_a_mover);
              // Sumar el precio del producto movido al total
             total_precios += parseFloat(fila_a_mover.find('.precio').text());
-
             // Mostrar el total de precios debajo de los botones
             $('#total_precios').text('Total Productos: ' + total_precios);
-
             // Limpiar la fila seleccionada
             fila_seleccionada_1 = null;
+    
         }
-        actualizarSuma();
     });
     // Mover la fila seleccionada a la tabla 1 cuando se haga clic en el botón btn_izquierda
     $('#btn_izquierda').on('click', function () {
@@ -135,10 +153,10 @@
 
             // Limpiar la fila seleccionada
             fila_seleccionada_2 = null;
+            
         }
-        actualizarSuma();
     });
-});
+
 total_servicios = 0;
 $('#guardar_servicio').on('click', function () {
     // Obtener los valores de los campos de entrada
@@ -166,12 +184,8 @@ $('#guardar_servicio').on('click', function () {
             alert('Servicio guardado exitosamente.');
         }
     });
-    actualizarSuma();
+    
 });
-    function actualizarSuma() {
-        var suma_total = parseFloat(total_precios) + parseFloat(total_servicios);
-        $('#total_suma').text('Total Suma: ' + suma_total);
-    }
     </script>
 
     <style>
