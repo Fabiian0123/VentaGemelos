@@ -186,31 +186,24 @@ $('#guardar_servicio').on('click', function () {
 $('#cobrar').on('click', function () {
     // Clona la tabla para evitar modificar la original en la página
     var tablaClonada = $('#tabla_resultados_2').clone();
-
     // Clona los divs de totalPrecio y totalServicios
     var totalPrecioClonado = $('#total_precios').clone();
     var totalServiciosClonado = $('#total_servicios').clone();
-
     // Elimina cualquier clase 'seleccionado' que pueda haber en la tabla clonada
     tablaClonada.find('.seleccionado').removeClass('seleccionado');
-
     // Abre una nueva ventana para mostrar el recibo antes de imprimir
     var ventana = window.open('', '_blank');
     ventana.document.write('<h2>Recibo de Venta</h2>');
     ventana.document.write(tablaClonada.html());
-
     // Agrega los divs de totalPrecio y totalServicios al recibo
     ventana.document.write('<div class="totalPrecio" id="total_precios_clonado">');
     ventana.document.write(totalPrecioClonado.html());
     ventana.document.write('</div>');
-
     ventana.document.write('<div class="totalServicios" id="total_servicios_clonado">');
     ventana.document.write(totalServiciosClonado.html());
     ventana.document.write('</div>');
-
     ventana.document.write('</body></html>');
     ventana.document.close();
-
     // Espera un breve momento antes de llamar a la función de impresión
     setTimeout(function () {
         ventana.print();
