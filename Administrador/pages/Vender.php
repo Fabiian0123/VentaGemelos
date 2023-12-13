@@ -11,6 +11,9 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#servicioModal">
             Agregar Servicio
         </button>
+        <button type="button" class="btn btn-warning m-2" data-toggle="modal" data-target="#guardar_cliente">
+            Agregar Cliente
+        </button>
     </form>
     <!-- Modal -->
     <div class="modal fade" id="servicioModal" tabindex="-1" role="dialog" aria-labelledby="servicioModalLabel" aria-hidden="true">
@@ -35,6 +38,31 @@
         </div>
     </div>
     </div>
+    <!--fin del modal-->
+    <!-- Modal para agregar cliente -->
+    <div class="modal fade" id="guardar_cliente" tabindex="-1" role="dialog" aria-labelledby="guardarClienteLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="guardarClienteLabel">Agregar Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para ingresar nombre y número de contacto del cliente -->
+                    <form id="form_cliente">
+                        Nombre del Cliente:<br>
+                        <input type="text" name="nombre_cliente" id="nombre_cliente"><br>
+                        Número de Contacto:<br>
+                        <input type="text" name="contacto_cliente" id="contacto_cliente"><br>
+                        <button type="button" id="guardar_cliente_btn">Guardar Cliente</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin del modal para agregar cliente -->
     <br>
     <div class="tablaResultados precio" id="tabla_resultados"></div>
     <div class="botonesVender">
@@ -183,6 +211,34 @@ $('#guardar_servicio').on('click', function () {
     });
     
 });
+// Agregar evento al botón "Guardar Cliente"
+$('#guardar_cliente_btn').on('click', function () {
+        // Obtener los valores del formulario
+        var nombreCliente = $('#nombre_cliente').val();
+        var numeroCelular = $('#contacto_cliente').val(); // Renombrar la variable para reflejar el cambio de nombre
+        // Realizar la consulta AJAX para guardar los datos en la base de datos
+        $.ajax({
+            type: 'POST',
+            url: '../DAO/guardar_cliente.php', // Ajusta la ruta según tu estructura de archivos
+            data: {
+                nombre_cliente: nombreCliente,
+                numero_celular: numeroCelular // Renombrar la variable para reflejar el cambio de nombre
+            },
+            success: function (data) {
+                // Manejar la respuesta del servidor
+                alert('Cliente guardado exitosamente.');
+
+                // Puedes realizar acciones adicionales aquí, como cerrar el modal, recargar la página, etc.
+
+                // Cerrar el modal
+                $('#guardar_cliente').modal('hide');
+            },
+            error: function (xhr, status, error) {
+                // Manejar errores
+                alert('Error al guardar el cliente: ' + error);
+            }
+        });
+    });
 $('#cobrar').on('click', function () {
     // Clona la tabla para evitar modificar la original en la página
     var tablaClonada = $('#tabla_resultados_2').clone();
