@@ -71,7 +71,7 @@
     </div>
     <div class="tablaResultados2" id="tabla_resultados_2">
         <tr>
-            <th><b>&nbspItem&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></th>
+            <th><b>&nbspCódigo&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></th>
             <th><b>Producto&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br></b></th>
         </tr>
     </div>
@@ -143,8 +143,8 @@
                 // Limpiar la fila seleccionada
                 fila_seleccionada_1 = null;
                 // Agregar un número al principio de la fila
-                var numero = $('#tabla_resultados_2 tr').length + 1;
-                fila_a_mover.prepend('<td>'+ numero +'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'&nbsp'+'</td>');
+                var numero = $('#tabla_resultados_2 tr').length;
+                fila_a_mover.prepend('<tr><td>' + '<br></td></tr>');
                 // Eliminar la columna 'cant' de la fila a mover
                 fila_a_mover.find('.cant').remove();
                 // Mover la fila a la tabla 2
@@ -189,8 +189,8 @@ $('#guardar_servicio').on('click', function () {
     var descripcion_servicio = $('#descripcion_servicio').val();
     var precio_servicio = parseInt($('#precio_servicio').val());
     // Agregar una nueva fila a la tabla con la información del servicio
-    var numero = $('#tabla_resultados_2 tr').length + 1;
-    var nueva_fila = '<tr><td>' + numero + '</td><td>'+'Servicio'+' '+' '+'</td><td>' + precio_servicio + '</td></tr>';
+    var numero = $('#tabla_resultados_2 tr').length;
+    var nueva_fila = '<br>'+'<tr><td>'+'</td><td>'+'Servicio:'+'</td><td>' + precio_servicio + '</td></tr><br>';
     $('#tabla_resultados_2').append(nueva_fila);
     // Sumar el precio del servicio al total de servicios
     total_servicios += parseFloat(precio_servicio);
@@ -216,6 +216,10 @@ $('#guardar_cliente_btn').on('click', function () {
         // Obtener los valores del formulario
         var nombreCliente = $('#nombre_cliente').val();
         var numeroCelular = $('#contacto_cliente').val(); // Renombrar la variable para reflejar el cambio de nombre
+        // Añadir una nueva fila a la tabla_resultados_2 con el nombre del cliente
+        var numeroFila = $('#tabla_resultados_2 tr').length + 1;
+        var nuevaFilaCliente = '<tr><td>' + 'Cliente:'+'&nbsp'+ '</td><td>' + nombreCliente + '</td><td></td></tr>';
+        $('#tabla_resultados_2').append(nuevaFilaCliente);
         // Realizar la consulta AJAX para guardar los datos en la base de datos
         $.ajax({
             type: 'POST',
@@ -252,6 +256,8 @@ $('#cobrar').on('click', function () {
     ventana.document.write('<h2>Recibo de Venta</h2>');
     ventana.document.write(tablaClonada.html());
     // Agrega los divs de totalPrecio y totalServicios al recibo
+    ventana.document.write('<br>');
+    ventana.document.write('<br>');
     ventana.document.write('<div class="totalPrecio" id="total_precios_clonado">');
     ventana.document.write(totalPrecioClonado.html());
     ventana.document.write('</div>');
