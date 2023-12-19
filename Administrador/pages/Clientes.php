@@ -5,7 +5,7 @@
     <?php include '../nav.php'; ?>
 
     <div class="container">
-        <h2>Listado de Clientes</h2>
+        <center><h2>Listado de Clientes</h2></center>
         <?php
         include '../conexion.php';
 

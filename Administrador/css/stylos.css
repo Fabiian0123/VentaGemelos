@@ -91,3 +91,14 @@
 .nombCliente{
     width: 90%;
 }
+.inDescServ{
+    width: 90%;
+}
+.ModTitleAggServ{
+    margin-left: 150px;
+    font-family: Arial Black;
+    color: aliceblue;
+}
+.ModHeaderAggServ{
+    background-color:cadetblue;
+}

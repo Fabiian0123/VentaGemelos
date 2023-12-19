@@ -19,8 +19,8 @@
     <div class="modal fade" id="servicioModal" tabindex="-1" role="dialog" aria-labelledby="servicioModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="servicioModalLabel">Agregar Servicio</h5>
+        <div class="modal-header ModHeaderAggServ">
+            <h5 class="modal-title ModTitleAggServ" id="servicioModalLabel">Agregar Servicio</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -29,10 +29,10 @@
             <!-- Aquí va tu formulario -->
             <form id="form_servicio" class="inBusqueda">
                 Descripción del servicio:<br>
-                <input type="text" name="descripcion_servicio" id="descripcion_servicio"><br>
+                <input type="text" name="descripcion_servicio" id="descripcion_servicio" class="inDescServ" require><br>
                 Precio del servicio:<br>
-                <input type="number" name="precio_servicio" id="precio_servicio"><br>
-                <button type="button" id="guardar_servicio">Agregar Servicio</button>
+                <input type="number" name="precio_servicio" id="precio_servicio" require><br><br>
+                <button type="button" id="guardar_servicio" class="btn btn-success">Agregar Servicio</button>
             </form>
         </div>
         </div>
@@ -161,28 +161,6 @@
         });
     }
 });
-    // Mover la fila seleccionada a la tabla 1 cuando se haga clic en el botón btn_izquierda
-    $('#btn_izquierda').on('click', function () {
-        if (fila_seleccionada_2) {
-            // Clonar la fila seleccionada y eliminar la clase 'seleccionado'
-            var fila_a_mover = fila_seleccionada_2.clone().removeClass('seleccionado');
-            // Mover la fila a la tabla 1
-            $('#tabla_resultados').append(fila_a_mover);
-            // Agregar controlador de eventos de clic a las filas de la tabla 1
-            $('#tabla_resultados tr').on('click', function () {
-                // Eliminar la clase 'seleccionado' de todas las filas
-                $('#tabla_resultados tr').removeClass('seleccionado');
-                // Agregar la clase 'seleccionado' a la fila que se acaba de hacer clic
-                $(this).addClass('seleccionado');
-                // Almacenar la fila seleccionada
-                fila_seleccionada_1 = $(this);
-            });
-            // Eliminar la fila seleccionada de la tabla 2
-            fila_seleccionada_2.remove();
-            // Limpiar la fila seleccionada
-            fila_seleccionada_2 = null;   
-        }
-    });
 total_servicios = 0;
 $('#guardar_servicio').on('click', function () {
     // Obtener los valores de los campos de entrada

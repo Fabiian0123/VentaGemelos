@@ -24,7 +24,7 @@
 
             // Mostrar la tabla solo si hay artículos asociados al socio
             if ($result_articulos->num_rows > 0) {
-                echo "<h2>Artículos de $nombSocio</h2>";
+                echo "<h4>Artículos de: $nombSocio</h4>";
                 echo "<table border='1'>";
                 echo "<tr><th>Código</th><th>Nombre</th><th>Marca</th><th>Precio</th></tr>";
 

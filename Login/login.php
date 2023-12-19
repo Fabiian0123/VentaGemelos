@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $username;
 
         // Redirigir al usuario a la página de vendedor
-        header("location: Vendedor.php");
+        header("location: /Vendedor/pagesVendedor/VVendedor.php");
 
     } elseif ($username == "gemelo" && $password == "pass") {
         // Iniciar sesión

@@ -6,7 +6,7 @@
     <?php include '../nav.php'; ?>
 
     <div>
-        <h2>Resetear Registros</h2>
+        <center><h2>Borrar Registros</h2></center>
 
         <?php
         include '../conexion.php';
@@ -14,7 +14,7 @@
             if (isset($_POST['reset_addproductos'])) {
                 // Borrar registros de la tabla "addproductos"
                 $sql = "DELETE FROM addproductos";
-                $result = mysqli_query($conexion, $sql);
+                $result = mysqli_query($conn, $sql);
                 if ($result) {
                     echo "Registros de 'addproductos' borrados correctamente.";
                 } else {
@@ -23,7 +23,7 @@
             } elseif (isset($_POST['reset_clientes'])) {
                 // Borrar registros de la tabla "clientes"
                 $sql = "DELETE FROM clientes";
-                $result = mysqli_query($conexion, $sql);
+                $result = mysqli_query($conn, $sql);
                 if ($result) {
                     echo "Registros de 'clientes' borrados correctamente.";
                 } else {
@@ -32,7 +32,7 @@
             } elseif (isset($_POST['reset_servi'])) {
                 // Borrar registros de la tabla "servi"
                 $sql = "DELETE FROM servi";
-                $result = mysqli_query($conexion, $sql);
+                $result = mysqli_query($conn, $sql);
                 if ($result) {
                     echo "Registros de 'servi' borrados correctamente.";
                 } else {
@@ -41,7 +41,7 @@
             } elseif (isset($_POST['reset_socios'])) {
                 // Borrar registros de la tabla "socios"
                 $sql = "DELETE FROM socios";
-                $result = mysqli_query($conexion, $sql);
+                $result = mysqli_query($conn, $sql);
                 if ($result) {
                     echo "Registros de 'socios' borrados correctamente.";
                 } else {
@@ -52,10 +52,10 @@
         ?>
 
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <button type="submit" name="reset_addproductos">Resetear addproductos</button>
-            <button type="submit" name="reset_clientes">Resetear clientes</button>
-            <button type="submit" name="reset_servi">Resetear servi</button>
-            <button type="submit" name="reset_socios">Resetear socios</button>
+            <button type="submit" name="reset_addproductos">Borrar Productos</button>
+            <button type="submit" name="reset_clientes">Borrar Clientes</button>
+            <button type="submit" name="reset_servi">Borrar Servicios</button>
+            <button type="submit" name="reset_socios">Borrar Socios</button>
         </form>
     </div>
 
