@@ -29,9 +29,9 @@
             <!-- Aquí va tu formulario -->
             <form id="form_servicio" class="inBusqueda">
                 Descripción del servicio:<br>
-                <input type="text" name="descripcion_servicio" id="descripcion_servicio" class="inDescServ" require><br>
+                <input type="text" name="descripcion_servicio" id="descripcion_servicio" class="inDescServ"><br>
                 Precio del servicio:<br>
-                <input type="number" name="precio_servicio" id="precio_servicio" require><br><br>
+                <input type="number" name="precio_servicio" id="precio_servicio"><br><br>
                 <button type="button" id="guardar_servicio" class="btn btn-success">Agregar Servicio</button>
             </form>
         </div>
@@ -43,8 +43,8 @@
     <div class="modal fade" id="guardar_cliente" tabindex="-1" role="dialog" aria-labelledby="guardarClienteLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="guardarClienteLabel">Agregar Cliente</h5>
+                <div class="modal-header ModalHeaderAggClient">
+                    <h5 class="modal-title ModTitleAggClient" id="guardarClienteLabel">Agregar Cliente</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -53,10 +53,10 @@
                     <!-- Formulario para ingresar nombre y número de contacto del cliente -->
                     <form id="form_cliente">
                         Nombre del Cliente:<br>
-                        <input type="text" name="nombre_cliente" id="nombre_cliente"><br>
+                        <input type="text" name="nombre_cliente" id="nombre_cliente" class="inNombCliente"><br>
                         Número de Contacto:<br>
-                        <input type="text" name="contacto_cliente" id="contacto_cliente"><br>
-                        <button type="button" id="guardar_cliente_btn">Guardar Cliente</button>
+                        <input type="text" name="contacto_cliente" id="contacto_cliente"><br><br>
+                        <button type="button" id="guardar_cliente_btn" class="btn btn-success">Guardar Cliente</button>
                     </form>
                 </div>
             </div>
@@ -66,7 +66,6 @@
     <br>
     <div class="tablaResultados precio" id="tabla_resultados"></div>
     <div class="botonesVender">
-        <a type="button" class="btn btn-danger" id="btn_izquierda"><--</a>
         <a type="button" class="btn btn-success m-2" id="btn_derecha">--></a>
     </div>
     <div class="tablaResultados2" id="tabla_resultados_2">
@@ -78,6 +77,7 @@
     <div class="totalPrecio" id="total_precios"></div>
     <div class="totalServicios" id="total_servicios"></div>
     <a type="button" class="btn btn-success cobrar" id="cobrar">Cobrar</a>
+    <div class="totalGeneral" id="total_general"></div>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script>
     var total_precios = 0;
@@ -166,6 +166,11 @@ $('#guardar_servicio').on('click', function () {
     // Obtener los valores de los campos de entrada
     var descripcion_servicio = $('#descripcion_servicio').val();
     var precio_servicio = parseInt($('#precio_servicio').val());
+    // Validar que los campos no estén vacíos y que el precio sea un número válido
+    if (descripcion_servicio.trim() === '' || isNaN(precio_servicio) || precio_servicio <= 0) {
+        alert('Por favor, complete todos los campos correctamente.');
+        return;
+    }
     // Agregar una nueva fila a la tabla con la información del servicio
     var numero = $('#tabla_resultados_2 tr').length;
     var nueva_fila = '<br>'+'<tr><td>'+'</td><td>'+'Servicio:'+'</td><td>' + precio_servicio + '</td></tr><br>';
@@ -194,6 +199,10 @@ $('#guardar_cliente_btn').on('click', function () {
         // Obtener los valores del formulario
         var nombreCliente = $('#nombre_cliente').val();
         var numeroCelular = $('#contacto_cliente').val(); // Renombrar la variable para reflejar el cambio de nombre
+        if (nombreCliente.trim() === '' || isNaN(numeroCelular) || numeroCelular <= 0) {
+        alert('Por favor, complete todos los campos correctamente.');
+        return;
+        }
         // Añadir una nueva fila a la tabla_resultados_2 con el nombre del cliente
         var numeroFila = $('#tabla_resultados_2 tr').length + 1;
         var nuevaFilaCliente = '<tr><td>' + 'Cliente:'+'&nbsp'+ '</td><td>' + nombreCliente + '</td><td></td></tr>';
@@ -222,6 +231,12 @@ $('#guardar_cliente_btn').on('click', function () {
         });
     });
 $('#cobrar').on('click', function () {
+    if ($('#tabla_resultados_2 tr').length === 0) {
+        alert('Error: No hay productos ni servicios para cobrar.');
+        return;
+    }
+    // Calcula el total general sumando total_precios y total_servicios
+    var total_general = total_precios + total_servicios;
     // Clona la tabla para evitar modificar la original en la página
     var tablaClonada = $('#tabla_resultados_2').clone();
     // Clona los divs de totalPrecio y totalServicios
@@ -241,6 +256,11 @@ $('#cobrar').on('click', function () {
     ventana.document.write('</div>');
     ventana.document.write('<div class="totalServicios" id="total_servicios_clonado">');
     ventana.document.write(totalServiciosClonado.html());
+    ventana.document.write('</div>');
+    ventana.document.write('</body></html>');
+    ventana.document.write('<br>');
+    ventana.document.write('<div class="totalGeneral" id="total_general_clonado">');
+    ventana.document.write('Total Venta: ' + total_general);
     ventana.document.write('</div>');
     ventana.document.write('</body></html>');
     ventana.document.close();

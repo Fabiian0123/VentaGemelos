@@ -8,15 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Verificar las credenciales
-    if ($username == "vendedor" && $password == "password") {
-        // Iniciar sesión
-        $_SESSION["loggedin"] = true;
-        $_SESSION["username"] = $username;
-
-        // Redirigir al usuario a la página de vendedor
-        header("location: /Vendedor/pagesVendedor/VVendedor.php");
-
-    } elseif ($username == "gemelo" && $password == "pass") {
+    if ($username == "gemelo" && $password == "pass") {
         // Iniciar sesión
         $_SESSION["loggedin"] = true;
         $_SESSION["username"] = $username;

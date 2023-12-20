@@ -5,8 +5,7 @@
 
 <body>
     <?php include '../nav.php'; ?>
-    
-    
+    <center><h3>Informe de ventas</h3></center>    
 </body>
 
 </html>

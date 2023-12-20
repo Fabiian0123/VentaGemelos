@@ -9,21 +9,21 @@ include '../head.php';
 <body>
     <?php include '../nav.php'; ?>
     <div class="form-addproducto">
-        <form action="../DAO/guarProducto.php" method="post">
+        <form action="../DAO/guarProducto.php" method="post" class="formAggProductos">
             Código del producto:<br>
-            <input class="in1" type="text" name="codigo_producto">
+            <input class="in1" type="text" name="codigo_producto" required>
             <br>
             Nombre del producto:<br>
-            <input class="in1" type="text" name="nombre_producto">
+            <input class="in1" type="text" name="nombre_producto" required>
             <br>
             Marca del producto:<br>
-            <input class="in1" type="text" name="marca_producto">
+            <input class="in1" type="text" name="marca_producto" required>
             <br>
             Precio del producto:<br>
-            <input class="in1" type="number" name="precio_producto">
+            <input class="in1" type="number" name="precio_producto" required>
             <br>
             Socio:<br>
-            <select class="in1" name="socio" id="socio">
+            <select class="in1" name="socio" id="socio" required>
             <option value="opcion0">Seleccione</option>
             <?php
                 include '../conexion.php';
@@ -44,7 +44,7 @@ include '../head.php';
         </select>
             <br>
             Cantidad de articulos:<br>
-            <input class="in1" type="number" name="cantidad_producto">
+            <input class="in1" type="number" name="cantidad_producto" required>
             <br>
             <br>
             <div class="btng">
@@ -62,6 +62,11 @@ include '../head.php';
             }
         }
         function agregarNuevoSocio(nombreSocio) {
+            if (!nombreSocio) {
+            alert("Por favor, completa el campo.");
+            mostrarAlertaConNombre();
+            return;
+    }
             // Crear una instancia de XMLHttpRequest (Ajax)
             var xhr = new XMLHttpRequest();
 
@@ -108,6 +113,7 @@ include '../head.php';
     xhr.send();
 }
     </script>
+    <a type="button" href="/Administrador/pages/Vender.php" class="btn btn-danger m-2">Terminar</a>
 </body>
 
 </html>

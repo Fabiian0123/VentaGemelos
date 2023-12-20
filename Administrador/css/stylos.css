@@ -1,6 +1,6 @@
 .divContainer{
-    border: 3px solid;
-    background-color:lightgray;
+    border: 2px solid;
+    background-color:black
 }
 .btn-salir{
     float: left;;
@@ -22,6 +22,7 @@
 .inBusqueda{
     margin-left: 30px;
     margin-top: 10px;
+    font-style: italic;
 }
 .inBusqueda2{
     width: 600px;
@@ -101,4 +102,29 @@
 }
 .ModHeaderAggServ{
     background-color:cadetblue;
+}
+.ModTitleAggClient{
+    margin-left: 150px;
+    font-family: Arial Black;
+    color: aliceblue;
+}
+.ModalHeaderAggClient{
+    background-color:cadetblue;
+}
+.inNombCliente{
+    width: 90%
+}
+.formReset{
+    text-align: center;
+}
+.inputBuscarClientes{
+    width: 350px;
+    border: 2px solid;
+    font-style: italic;
+}
+.formAggProductos{
+    font-style: italic;
+}
+.alertaReset{
+    font-style: italic;
 }

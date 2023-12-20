@@ -24,17 +24,19 @@
 
             // Mostrar la tabla solo si hay artículos asociados al socio
             if ($result_articulos->num_rows > 0) {
-                echo "<h4>Artículos de: $nombSocio</h4>";
-                echo "<table border='1'>";
-                echo "<tr><th>Código</th><th>Nombre</th><th>Marca</th><th>Precio</th></tr>";
-
+                echo "<br><h4 style='margin-left: 10px;'>Artículos de: $nombSocio</h4>";
+                echo "<table border='2' style='margin-left: 10px;'>";
+                echo "<tr><th>#</th><th>Código</th><th>Nombre</th><th>Marca</th><th>Precio</th></tr>";
+                $contador = 1;
                 while ($row_articulos = $result_articulos->fetch_assoc()) {
                     echo "<tr>";
+                    echo "<td>" . $contador . "</td>";
                     echo "<td>" . $row_articulos['codProducto'] . "</td>";
                     echo "<td>" . $row_articulos['nombProducto'] . "</td>";
                     echo "<td>" . $row_articulos['marcProducto'] . "</td>";
                     echo "<td>" . $row_articulos['precProducto'] . "</td>";
                     echo "</tr>";
+                    $contador++;
                 }
 
                 echo "</table>";

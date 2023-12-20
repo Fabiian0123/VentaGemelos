@@ -21,6 +21,10 @@
     // Obtener los valores de los campos de entrada
     var descripcion_servicio = $('#descripcion_servicio').val();
     var precio_servicio = parseInt($('#precio_servicio').val());
+    if (descripcion_servicio.trim() === '' || isNaN(precio_servicio) || precio_servicio <= 0) {
+        alert('Por favor, complete todos los campos correctamente.');
+        return;
+    }
     // Agregar una nueva fila a la tabla con la información del servicio
     var numero = $('#tabla_resultados_2 tr').length + 1;
     var nueva_fila = '<tr><td>' + numero + '</td><td>'+'Servicio'+' '+' '+'</td><td>' + precio_servicio + '</td></tr>';
