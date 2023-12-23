@@ -161,6 +161,7 @@
         });
     }
 });
+
 total_servicios = 0;
 $('#guardar_servicio').on('click', function () {
     // Obtener los valores de los campos de entrada
@@ -192,7 +193,6 @@ $('#guardar_servicio').on('click', function () {
             alert('Servicio guardado exitosamente.');
         }
     });
-    
 });
 // Agregar evento al botón "Guardar Cliente"
 $('#guardar_cliente_btn').on('click', function () {

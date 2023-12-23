@@ -19,7 +19,7 @@
                 if ($result) {
                     $message = "Productos borrados correctamente.";
                 } else {
-                    $message = "Error al borrar registros: " . mysqli_error($conexion);
+                    $message = "Error al borrar registros: " . mysqli_error($conn);
                 }
             } elseif (isset($_POST['reset_clientes'])) {
                 // Borrar registros de la tabla "clientes"
@@ -28,7 +28,7 @@
                 if ($result) {
                     $message = "Clientes borrados correctamente.";
                 } else {
-                    $message = "Error al borrar registros: " . mysqli_error($conexion);
+                    $message = "Error al borrar registros: " . mysqli_error($conn);
                 }
             } elseif (isset($_POST['reset_servi'])) {
                 // Borrar registros de la tabla "servi"
@@ -37,7 +37,7 @@
                 if ($result) {
                     $message = "Servicios borrados correctamente.";
                 } else {
-                    $message = "Error al borrar registros: " . mysqli_error($conexion);
+                    $message = "Error al borrar registros: " . mysqli_error($conn);
                 }
             }
         }
