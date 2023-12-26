@@ -20,14 +20,28 @@
         echo "<table border='1' class='tablaInforme'>
                 <tr>
                     <th>Socio</th>
-                    <th>&nbsp&nbsp&nbspSaldo del dia</th>
+                    <th>  &nbspSaldo del día</th>
+                    <th>  &nbspVenta del dia</th>
                 </tr>";
 
         while ($fila = $resultado->fetch_assoc()) {
+            // Consultar la base de datos para obtener el saldo inicial del día
+            $consultaSaldoInicial = "SELECT saldoInicial FROM saldos WHERE socioInfo = '{$fila['socio']}'";
+            $resultadoSaldoInicial = $conn->query($consultaSaldoInicial);
+            $filaSaldoInicial = $resultadoSaldoInicial->fetch_assoc();
+
+            // Calcular la venta del día
+            $ventaDelDia = $filaSaldoInicial['saldoInicial'] - $fila['totalPrecio'];
+
             echo "<tr>
                     <td>{$fila['socio']}</td>
-                    <td>&nbsp&nbsp&nbsp{$fila['totalPrecio']}</td>
+                    <td>   {$fila['totalPrecio']}</td>
+                    <td>   {$ventaDelDia}</td>
                   </tr>";
+
+            // Actualizar el saldo inicial en la tabla saldos
+            $actualizarSaldo = "UPDATE saldos SET saldoInicial = '{$fila['totalPrecio']}' WHERE socioInfo = '{$fila['socio']}'";
+            $conn->query($actualizarSaldo);
         }
 
         echo "</table>";
@@ -39,4 +53,9 @@
 </body>
 
 </html>
+
+
+
+
+
 
