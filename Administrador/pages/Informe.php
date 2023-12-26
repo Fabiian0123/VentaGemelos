@@ -28,10 +28,20 @@
             // Consultar la base de datos para obtener el saldo inicial del día
             $consultaSaldoInicial = "SELECT saldoInicial FROM saldos WHERE socioInfo = '{$fila['socio']}'";
             $resultadoSaldoInicial = $conn->query($consultaSaldoInicial);
-            $filaSaldoInicial = $resultadoSaldoInicial->fetch_assoc();
+
+            // Inicializar la variable para almacenar el saldo inicial
+            $saldoInicial = 0;
+
+            // Check if the query returned any results
+            if ($resultadoSaldoInicial->num_rows > 0) {
+                $filaSaldoInicial = $resultadoSaldoInicial->fetch_assoc();
+
+                // Almacenar el saldo inicial en la variable
+                $saldoInicial = $filaSaldoInicial['saldoInicial'];
+            }
 
             // Calcular la venta del día
-            $ventaDelDia = $filaSaldoInicial['saldoInicial'] - $fila['totalPrecio'];
+            $ventaDelDia = $saldoInicial - $fila['totalPrecio'];
 
             echo "<tr>
                     <td>{$fila['socio']}</td>
@@ -39,8 +49,8 @@
                     <td>   {$ventaDelDia}</td>
                   </tr>";
 
-            // Actualizar el saldo inicial en la tabla saldos
-            $actualizarSaldo = "UPDATE saldos SET saldoInicial = '{$fila['totalPrecio']}' WHERE socioInfo = '{$fila['socio']}'";
+            // Actualizar o insertar el saldo inicial en la tabla saldos
+            $actualizarSaldo = "REPLACE INTO saldos (socioInfo, saldoInicial) VALUES ('{$fila['socio']}', '{$saldoInicial}')";
             $conn->query($actualizarSaldo);
         }
 
@@ -53,6 +63,19 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
