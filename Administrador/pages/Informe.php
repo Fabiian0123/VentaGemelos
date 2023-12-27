@@ -19,39 +19,39 @@
         // Mostrar los datos en una tabla
         echo "<table border='1' class='tablaInforme'>
                 <tr>
-                    <th>Socio</th>
-                    <th>  &nbspSaldo del día</th>
-                    <th>  &nbspVenta del dia</th>
+                    <th>&nbsp&nbspSocio</th>
+                    <th>&nbsp&nbspSaldo del día</th>
+                    <th>&nbsp&nbspVenta del día</th>
                 </tr>";
 
         while ($fila = $resultado->fetch_assoc()) {
-            // Consultar la base de datos para obtener el saldo inicial del día
-            $consultaSaldoInicial = "SELECT saldoInicial FROM saldos WHERE socioInfo = '{$fila['socio']}'";
+            echo "<tr>
+                    <td>&nbsp&nbsp{$fila['socio']}</td>
+                    <td>&nbsp&nbsp{$fila['totalPrecio']}</td>";
+
+            // Obtener el saldo inicial actual de la tabla saldos
+            $socioInfo = $fila['socio'];
+            $consultaSaldoInicial = "SELECT saldoInicial FROM saldos WHERE socioInfo = '{$socioInfo}'";
             $resultadoSaldoInicial = $conn->query($consultaSaldoInicial);
-
-            // Inicializar la variable para almacenar el saldo inicial
-            $saldoInicial = 0;
-
-            // Check if the query returned any results
-            if ($resultadoSaldoInicial->num_rows > 0) {
-                $filaSaldoInicial = $resultadoSaldoInicial->fetch_assoc();
-
-                // Almacenar el saldo inicial en la variable
-                $saldoInicial = $filaSaldoInicial['saldoInicial'];
-            }
+            $filaSaldoInicial = $resultadoSaldoInicial->fetch_assoc();
+            $saldoInicial = $filaSaldoInicial['saldoInicial'];
 
             // Calcular la venta del día
-            $ventaDelDia = $saldoInicial - $fila['totalPrecio'];
+            $ventaDia = $saldoInicial - $fila['totalPrecio'];
 
-            echo "<tr>
-                    <td>{$fila['socio']}</td>
-                    <td>   {$fila['totalPrecio']}</td>
-                    <td>   {$ventaDelDia}</td>
+            // Mostrar la venta del día en la tabla
+            echo "<td>&nbsp&nbsp{$ventaDia}</td>
                   </tr>";
 
-            // Actualizar o insertar el saldo inicial en la tabla saldos
-            $actualizarSaldo = "REPLACE INTO saldos (socioInfo, saldoInicial) VALUES ('{$fila['socio']}', '{$saldoInicial}')";
-            $conn->query($actualizarSaldo);
+            // Calcular el saldo final
+            $saldoFinal = $saldoInicial - $fila['totalPrecio'];
+
+            // Actualizar o insertar la información en la tabla saldos
+            $actualizarSaldos = "INSERT INTO saldos (socioInfo, saldoInicial, saldoFinal)
+                                VALUES ('{$socioInfo}', '{$fila['totalPrecio']}', '{$saldoFinal}')
+                                ON DUPLICATE KEY UPDATE saldoInicial = '{$fila['totalPrecio']}', saldoFinal = '{$saldoFinal}'";
+
+            $conn->query($actualizarSaldos);
         }
 
         echo "</table>";
@@ -61,18 +61,7 @@
         ?>
     </div>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
 
 
 
