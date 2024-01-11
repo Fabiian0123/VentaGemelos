@@ -46,6 +46,8 @@ include '../head.php';
             Cantidad de articulos:<br>
             <input class="in1" type="number" name="cantidad_producto" required>
             <br>
+            Precio de compra:<br>
+            <input class="in1" type="number" name="precio_compra" required>
             <br>
             <div class="btng">
                 <input type="submit" class="btn btn-success m-2" value="Guardar Producto">
