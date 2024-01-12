@@ -24,19 +24,27 @@ if ($stmt->error) {
     die('Error en la preparación de la sentencia: ' . $stmt->error);
 }
 
+// Bandera para verificar si hubo algún error durante la ejecución
+$errores = false;
+
 // Ejecutar la declaración tantas veces como la cantidad especificada
 for ($i = 0; $i < $cantidad_producto; $i++) {
     // Vincular el parámetro 'socio' en cada iteración
     $stmt->bind_param('sssdss', $codigo_producto, $nombre_producto, $marca_producto, $precio_producto, $socio, $precio_compra);
 
-    if ($stmt->execute()) {
-        echo "Producto " . ($i + 1) . " guardado exitosamente<br>";
-    } else {
+    if (!$stmt->execute()) {
         echo "Error al guardar producto " . ($i + 1) . ": " . $stmt->error . "<br>";
+        $errores = true;
     }
 }
 
 // Cerrar la sentencia preparada y la conexión
 $stmt->close();
 $conn->close();
+
+// Mostrar alerta si no hubo errores
+if (!$errores) {
+    echo "<script>alert('Productos guardados exitosamente');window.location.href = '/Administrador/pages/AddProductos.php';</script>";
+}
 ?>
+

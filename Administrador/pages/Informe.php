@@ -95,18 +95,35 @@ $conn->close();
     // Get the form elements
     var resetColumnsBtn = document.getElementById('resetColumnsBtn');
 
-    // Add an event listener for when the form is submitted
     form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        // Get the HTML element you want to convert to PDF
-        var element = document.querySelector('.tablaInforme');
-        // Use html2pdf to convert the element
-        html2pdf().from(element).save('informe.pdf');
+    e.preventDefault();
 
-        // Habilitar el botón resetColumns después de generar el informe
-        resetColumnsBtn.removeAttribute('disabled');
-    });
-    
+    // Crear un nuevo elemento div para el título
+    var titleDiv = document.createElement('div');
+    titleDiv.innerHTML = '<h4>Informe Diario de Ventas y Ganancias por Socios</h4>';
+    titleDiv.style.textAlign = 'center';
+    titleDiv.style.marginBottom = '20px';
+
+    // Obtener el elemento HTML que deseas convertir a PDF
+    var element = document.querySelector('.tablaInforme');
+
+    // Crear un contenedor para el título y la tabla
+    var container = document.createElement('div');
+    container.appendChild(titleDiv);
+    container.appendChild(element.cloneNode(true));
+
+    // Obtener la fecha y hora actual
+    var currentDate = new Date();
+    var formattedDate = currentDate.getDate() + "." + (currentDate.getMonth() + 1) + "." + currentDate.getFullYear();
+    var formattedTime = currentDate.getHours() + ';' + currentDate.getMinutes() + ';' + currentDate.getSeconds();
+    var fileName = 'informe_' + formattedDate + '_' + formattedTime + '.pdf';
+
+    // Usar html2pdf para convertir el contenedor y guardar con el nombre de archivo generado
+    html2pdf().from(container).save(fileName);
+
+    // Habilitar el botón resetColumns después de generar el informe
+    resetColumnsBtn.removeAttribute('disabled');
+});
 
 </script>
 </body>
