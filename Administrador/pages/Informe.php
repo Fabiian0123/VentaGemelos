@@ -3,7 +3,7 @@
 
 <?php include '../head.php'; ?>
 
-<body>
+<body class="fondoInforme">
     <?php include '../nav.php'; ?>
     <div>
         <center><h2>Informe de ventas diarias por socio</h2></center>
@@ -77,14 +77,14 @@ echo "</table>";
 $conn->close();
 ?>  
 <form method="post" id="myForm">
-    <input type="submit" name="reset" value="Generar Informe">
+    <input type="submit" name="reset" value="Generar Informe" class="btn btn-success m-2">
 </form>
 
 </div>
 
 <!-- Botón para restablecer las columnas ganDia y saldoFinal a cero -->
 <form method="post" id="resetForm">
-    <input type="submit" name="resetColumns" value="Restablecer Informe" id="resetColumnsBtn" disabled>
+    <input type="submit" name="resetColumns" value="Restablecer Informe" id="resetColumnsBtn" class="btn btn-danger m-2" disabled>
 </form>
 
 <!-- Include the html2pdf library -->
@@ -97,9 +97,10 @@ $conn->close();
 
     form.addEventListener('submit', function (e) {
     e.preventDefault();
-
+    
     // Crear un nuevo elemento div para el título
     var titleDiv = document.createElement('div');
+    
     titleDiv.innerHTML = '<h4>Informe Diario de Ventas y Ganancias por Socios</h4>';
     titleDiv.style.textAlign = 'center';
     titleDiv.style.marginBottom = '20px';

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php include '../head.php'; ?>
-<body>
+<body class="fondoReset">
     <?php include '../nav.php'; ?>
 
     <div>
@@ -39,6 +39,15 @@
                 } else {
                     $message = "Error al borrar registros: " . mysqli_error($conn);
                 }
+            }elseif (isset($_POST['reset_socios'])) {
+                // Borrar registros de la tabla "socios"
+                $sql = "DELETE FROM socios";
+                $result = mysqli_query($conn, $sql);
+                if ($result) {
+                    $message = "Socios borrados correctamente.";
+                } else {
+                    $message = "Error al borrar registros: " . mysqli_error($conn);
+                }
             }
         }
         ?>
@@ -46,6 +55,8 @@
             <button type="submit" name="reset_addproductos" class="btn btn-danger m-4" onclick="return confirm('¿Estás seguro de que quieres borrar todos los productos?');">Borrar Productos</button>
             <button type="submit" name="reset_clientes" class="btn btn-danger m-4" onclick="return confirm('¿Estás seguro de que quieres borrar todos los clientes?');">Borrar Clientes</button>
             <button type="submit" name="reset_servi" class="btn btn-danger m-4" onclick="return confirm('¿Estás seguro de que quieres borrar todos los servicios?');">Borrar Servicios</button>
+            <button type="submit" name="reset_socios" class="btn btn-danger m-4" onclick="return confirm('¿Estás seguro de que quieres borrar todos los socios?');">Borrar Socios</button>
+
         </form>
     </div>
     <center><h4 class="alertaReset">Alerta!, si borras cualquier registro, no se podra recuperar despues</h4><center>

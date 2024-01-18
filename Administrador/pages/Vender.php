@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php include '../head.php';?>
-<body>
+<body class="fondoVender">
     <?php include '../nav.php'; ?>
 
     <form class="inBusqueda">
@@ -230,7 +230,7 @@ $('#guardar_cliente_btn').on('click', function () {
             }
         });
     });
-$('#cobrar').on('click', function () {
+    $('#cobrar').on('click', function () {
     if ($('#tabla_resultados_2 tr').length === 0) {
         alert('Error: No hay productos ni servicios para cobrar.');
         return;
@@ -246,6 +246,11 @@ $('#cobrar').on('click', function () {
     tablaClonada.find('.seleccionado').removeClass('seleccionado');
     // Abre una nueva ventana para mostrar el recibo antes de imprimir
     var ventana = window.open('', '_blank');
+    
+    // Agrega la imagen antes del título "Recibo de Venta"
+    var imagenURL = '/Login/img/logoMellosRecibo.png'; // Reemplaza con la URL de tu imagen
+    ventana.document.write('<img src="' + imagenURL + '" alt="Logo">');
+    ventana.document.write('<h4>Nit: 1093776587</h4>');
     ventana.document.write('<h2>Recibo de Venta</h2>');
     ventana.document.write(tablaClonada.html());
     // Agrega los divs de totalPrecio y totalServicios al recibo
@@ -257,7 +262,6 @@ $('#cobrar').on('click', function () {
     ventana.document.write('<div class="totalServicios" id="total_servicios_clonado">');
     ventana.document.write(totalServiciosClonado.html());
     ventana.document.write('</div>');
-    ventana.document.write('</body></html>');
     ventana.document.write('<br>');
     ventana.document.write('<div class="totalGeneral" id="total_general_clonado">');
     ventana.document.write('Total Venta: ' + total_general);
@@ -273,6 +277,7 @@ $('#cobrar').on('click', function () {
         };
     }, 1000);
 });
+
 </script>
 </body>
 </html>

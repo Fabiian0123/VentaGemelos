@@ -3,7 +3,7 @@
 
 <?php include '../head.php';?>
 
-<body>
+<body class="fonfoServicios">
     <?php include '../nav.php'; ?>
     <h3 class="titleServicios">Venda servicios aqui!</h3>
     <form id="form_servicio" class="inBusqueda">
@@ -51,6 +51,10 @@ $('#cobrarServ').on('click', function () {
     var precio_servicio = $('#precio_servicio').val();
     // Abre una nueva ventana para mostrar el recibo antes de imprimir
     var ventana = window.open('', '_blank');
+    // Agrega la imagen antes del título "Recibo de Venta"
+    var imagenURL = '/Login/img/logoMellosRecibo.png'; // Reemplaza con la URL de tu imagen
+    ventana.document.write('<img src="' + imagenURL + '" alt="Logo">');
+    ventana.document.write('<h4>Nit: 1093776587</h4>');
     ventana.document.write('<h2>Recibo de Venta de servicio</h2>');
     // Agrega los divs de descripción_servicio y precio_servicio al recibo
     ventana.document.write('<p>Descripción del servicio: ' + descripcion_servicio + '</p>');

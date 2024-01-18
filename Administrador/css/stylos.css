@@ -23,6 +23,7 @@
     margin-left: 30px;
     margin-top: 10px;
     font-style: italic;
+    font-weight: bold;
 }
 .inBusqueda2{
     width: 600px;
@@ -32,6 +33,7 @@
     border: 3px solid;
     height: 400px;
     width: 515px;
+    background-color: white;
 }
 .tablaResultados2{
     margin-left: 720px;
@@ -39,7 +41,8 @@
     border: 3px solid;
     border: 3px solid;
     height: 400px;
-    width: 410px;   
+    width: 410px;
+    background-color: white;   
 }
 .botonesVender{
     text-align: center;
@@ -124,6 +127,7 @@
 }
 .formAggProductos{
     font-style: italic;
+    font-weight: bold;
 }
 .alertaReset{
     font-style: italic;
@@ -131,3 +135,10 @@
 .tablaInforme{
     margin-left: 10px;
 }
+.fondoVender, .fonfoServicios, .fondoAddProductos, .fondoInforme, .fondoReset{
+    background-color: #c6c6c6;
+}
+.tablaInforme{
+    background-color: white;
+}
+

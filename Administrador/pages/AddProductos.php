@@ -6,7 +6,7 @@ include '../conexion.php';
 include '../head.php';
 ?>
 
-<body>
+<body class="fondoAddProductos">
     <?php include '../nav.php'; ?>
     <div class="form-addproducto">
         <form action="../DAO/guarProducto.php" method="post" class="formAggProductos">
