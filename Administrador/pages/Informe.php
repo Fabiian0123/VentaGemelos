@@ -11,7 +11,7 @@
 // Incluir el archivo de conexión
 include '../conexion.php';
 // Consultar la base de datos para obtener la suma de precios y precCompra por socio en la tabla addproductos
-$consulta = "SELECT socio, SUM(precProducto) as totalPrecio, SUM(precCompra) as totalCompra FROM addproductos GROUP BY socio";
+$consulta = "SELECT socio, SUM(precProducto) as totalPrecio, SUM(precCompra) as totalCompra, SUM(precEntrada) as totalEntrada FROM addproductos GROUP BY socio";
 $resultado = $conn->query($consulta);
 // Mostrar los datos en una tabla
 echo "<table border='1' class='tablaInforme'>
@@ -19,8 +19,9 @@ echo "<table border='1' class='tablaInforme'>
             <th>&nbspSocio</th>
             <th> &nbspSaldo del día</th>
             <th> &nbspVenta del día</th>
-            <th> &nbspTotal Ganancia</th>
+            <th> &nbspGanancia total</th>
             <th> &nbspGanancia del dia</th>
+            <th> &nbspPrecio de entrada</th>
         </tr>";
 while ($fila = $resultado->fetch_assoc()) {
     echo "<tr>
@@ -54,6 +55,7 @@ while ($fila = $resultado->fetch_assoc()) {
     }
     // Mostrar la ganancia del día en la tabla
     echo "<td>  {$gananciaDia}</td>
+            <td>&nbsp&nbsp{$fila['totalEntrada']}</td>
           </tr>";
     // Calcular el saldo final
     $saldoFinal = $saldoInicial - $fila['totalPrecio'];
