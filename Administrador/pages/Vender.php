@@ -235,8 +235,14 @@ $('#guardar_cliente_btn').on('click', function () {
         alert('Error: No hay productos ni servicios para cobrar.');
         return;
     }
+    
     // Calcula el total general sumando total_precios y total_servicios
     var total_general = total_precios + total_servicios;
+
+    // Obtiene la fecha y hora actual
+    var fechaHoraActual = new Date();
+    var fechaHoraString = 'Fecha y Hora: ' + fechaHoraActual.toLocaleString();
+
     // Clona la tabla para evitar modificar la original en la página
     var tablaClonada = $('#tabla_resultados_2').clone();
     // Clona los divs de totalPrecio y totalServicios
@@ -251,6 +257,7 @@ $('#guardar_cliente_btn').on('click', function () {
     var imagenURL = '/Login/img/logoMellosRecibo.png'; // Reemplaza con la URL de tu imagen
     ventana.document.write('<img src="' + imagenURL + '" alt="Logo">');
     ventana.document.write('<h4>Nit: 1093776587</h4>');
+    ventana.document.write('<p>' + fechaHoraString + '</p>'); // Agrega la fecha y hora
     ventana.document.write('<h2>Recibo de Venta</h2>');
     ventana.document.write(tablaClonada.html());
     // Agrega los divs de totalPrecio y totalServicios al recibo
@@ -277,6 +284,7 @@ $('#guardar_cliente_btn').on('click', function () {
         };
     }, 1000);
 });
+
 
 </script>
 </body>

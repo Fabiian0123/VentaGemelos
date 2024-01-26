@@ -49,18 +49,29 @@ $('#cobrarServ').on('click', function () {
     // Obtener los valores de los campos de entrada
     var descripcion_servicio = $('#descripcion_servicio').val();
     var precio_servicio = $('#precio_servicio').val();
+
     // Abre una nueva ventana para mostrar el recibo antes de imprimir
     var ventana = window.open('', '_blank');
+
     // Agrega la imagen antes del título "Recibo de Venta"
     var imagenURL = '/Login/img/logoMellosRecibo.png'; // Reemplaza con la URL de tu imagen
     ventana.document.write('<img src="' + imagenURL + '" alt="Logo">');
     ventana.document.write('<h4>Nit: 1093776587</h4>');
+
+    // Obtiene la fecha y hora actual
+    var fechaHoraActual = new Date();
+    var fechaHoraString = 'Fecha y Hora: ' + fechaHoraActual.toLocaleString();
+    ventana.document.write('<p>' + fechaHoraString + '</p>'); // Agrega la fecha y hora
+
     ventana.document.write('<h2>Recibo de Venta de servicio</h2>');
+    
     // Agrega los divs de descripción_servicio y precio_servicio al recibo
     ventana.document.write('<p>Descripción del servicio: ' + descripcion_servicio + '</p>');
     ventana.document.write('<p>Precio del servicio: ' + precio_servicio + '</p>');
     ventana.document.write('</body></html>');
+
     ventana.document.close();
+
     // Espera un breve momento antes de llamar a la función de impresión
     setTimeout(function () {
         ventana.print();
@@ -70,6 +81,7 @@ $('#cobrarServ').on('click', function () {
         };
     }, 1000);
 });
+
 
     </script>
 </body>
