@@ -53,9 +53,7 @@ $('#cobrarServ').on('click', function () {
     // Abre una nueva ventana para mostrar el recibo antes de imprimir
     var ventana = window.open('', '_blank');
 
-    // Agrega la imagen antes del título "Recibo de Venta"
-    var imagenURL = '/Login/img/logoMellosRecibo.png'; // Reemplaza con la URL de tu imagen
-    ventana.document.write('<img src="' + imagenURL + '" alt="Logo">');
+    ventana.document.write('<h1>LUBRIREPUESTOS QUINTANA</h1>');
     ventana.document.write('<h4>Nit: 1093776587</h4>');
 
     // Obtiene la fecha y hora actual

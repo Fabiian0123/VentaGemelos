@@ -254,8 +254,7 @@ $('#guardar_cliente_btn').on('click', function () {
     var ventana = window.open('', '_blank');
     
     // Agrega la imagen antes del título "Recibo de Venta"
-    var imagenURL = '/Login/img/logoMellosRecibo.png'; // Reemplaza con la URL de tu imagen
-    ventana.document.write('<img src="' + imagenURL + '" alt="Logo">');
+    ventana.document.write('<h1>LUBRIREPUESTOS QUINTANA</h1>');
     ventana.document.write('<h4>Nit: 1093776587</h4>');
     ventana.document.write('<p>' + fechaHoraString + '</p>'); // Agrega la fecha y hora
     ventana.document.write('<h2>Recibo de Venta</h2>');
